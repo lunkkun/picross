@@ -1,0 +1,15 @@
+<template>
+  <div class="board">
+
+  </div>
+</template>
+
+<script>
+  export default {
+    name: 'Board',
+  }
+</script>
+
+<style scoped lang="scss">
+  .board {}
+</style>
