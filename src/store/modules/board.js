@@ -123,7 +123,7 @@ export default {
     },
   },
   actions: {
-    load: ({commit, state}, {solution, colorSet: colorScheme}) => {
+    load: ({commit, state}, {solution, colorScheme}) => {
       state.solution = solution
       state.height = solution.length
       state.width = solution.length > 0 ? solution[0].length : 0
