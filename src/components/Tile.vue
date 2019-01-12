@@ -20,10 +20,8 @@ export default {
     styleObject: function () {
       return {
         "background-color": this.color,
-        "border-top-width": this.rownum % 5 === 0 ? "medium" : "thin",
         "border-right-width": this.colnum % 5 === 4 ? "medium" : "thin",
         "border-bottom-width": this.rownum % 5 === 4 ? "medium" : "thin",
-        "border-left-width": this.colnum % 5 === 0 ? "medium" : "thin",
       }
     },
   },
@@ -35,5 +33,7 @@ export default {
     width: 20px;
     height: 20px;
     border-style: solid;
+    border-top-width: thin;
+    border-left-width: thin;
   }
 </style>
