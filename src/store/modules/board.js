@@ -5,7 +5,7 @@ export default {
     height: 0,
     solution: [],
     colored: [],
-    colorScheme: []
+    colorScheme: [],
   },
   getters: {
     // returns the width of the board
@@ -56,12 +56,12 @@ export default {
     },
 
     // returns the clues to display for a row
-    cluesForRow: state => (rownum) => {
+    cluesForRow: (state, getters) => (rownum) => {
       return getters.cluesForRowOrColumn(state.solution[rownum])
     },
 
     // returns the clues to display for a row
-    cluesForColumn: state => (colnum) => {
+    cluesForColumn: (state, getters) => (colnum) => {
       return getters.cluesForRowOrColumn(state.solution.map(row => row[colnum]))
     },
 
@@ -74,7 +74,7 @@ export default {
             // A block of colored tiles has ended; add a clue for it
             clues.push({
               color: state.colorScheme[previous],
-              count: count
+              count: count,
             })
           }
 
