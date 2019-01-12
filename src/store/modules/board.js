@@ -33,14 +33,14 @@ export default {
     // checks whether the row at the rownum is completed
     rowIsCompleted: state => rownum => {
       return state.colored[rownum].reduce((previousCompleted, color, colnum) => {
-        return previousCompleted && color > 0 && color === state.solution[rownum][colnum]
+        return previousCompleted && state.solution[rownum][colnum] === Math.max(color, 0) // treat -1 as 0
       }, true)
     },
 
     // checks whether the column at the colnum is completed
     columnIsCompleted: state => colnum => {
       return state.colored.reduce((previousCompleted, row, rownum) => {
-        return previousCompleted && row[colnum] > 0 && row[colnum] === state.solution[rownum][colnum]
+        return previousCompleted && state.solution[rownum][colnum] === Math.max(row[colnum], 0) // treat -1 as 0
       }, true)
     },
 
