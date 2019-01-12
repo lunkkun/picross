@@ -60,7 +60,7 @@ export default {
       return getters.cluesForRowOrColumn(state.solution[rownum])
     },
 
-    // returns the clues to display for a row
+    // returns the clues to display for a column
     cluesForColumn: (state, getters) => (colnum) => {
       return getters.cluesForRowOrColumn(state.solution.map(row => row[colnum]))
     },
