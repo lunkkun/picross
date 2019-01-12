@@ -18,11 +18,6 @@ export default {
       return state.height
     },
 
-    // returns the default color of the board to use in case the user hasn't clicked on a tile yet
-    defaultColor: state => {
-      return state.colorScheme[0]
-    },
-
     // checks whether the entire board is completed
     isCompleted: (state, getters) => {
       return state.colored.reduce((previousCompleted, row, rownum) => {
