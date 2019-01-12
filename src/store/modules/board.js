@@ -104,7 +104,7 @@ export default {
 
     // clears all user-input
     clearColored: state => {
-      state.colored.fill([].fill(0, 0, state.width), 0, state.height)
+      state.colored = Array(state.height).fill(Array(state.width).fill(0))
     },
   },
   actions: {
