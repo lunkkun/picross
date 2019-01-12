@@ -71,19 +71,18 @@ export default {
       return rowOrColumn.push(0).reduce(({previous, count, clues}, color) => {
         if (color !== previous) {
           if (previous > 0) {
+            // A block of colored tiles has ended; add a clue for it
             clues.push({
               color: state.colorScheme[previous],
               count: count
             })
           }
 
-          previous = color
+          // reset the count for the current color
           count = 0
         }
 
-        count++
-
-        return {previous: previous, count: count, clues: clues}
+        return {previous: color, count: ++count, clues: clues}
       }, {previous: 0, count: 0, clues: []}).clues
     },
   },
