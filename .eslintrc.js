@@ -11,13 +11,7 @@ module.exports = {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'object-curly-spacing': ['error', 'never'],
-    'comma-dangle': ['error', {
-      'arrays': 'always-multiline',
-      'objects': 'always-multiline',
-      'imports': 'never',
-      'exports': 'never',
-      'functions': 'never',
-    } ],
+    'comma-dangle': ['error', 'always-multiline'],
   },
   parserOptions: {
     parser: 'babel-eslint',
