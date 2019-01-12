@@ -55,26 +55,17 @@ export default {
       return state.colored[rownum][colnum] === -1
     },
 
-    // returns the clues to display at the top and to the left of the board
-    clues: (state, getters) => {
-      return {
-        rows: state.solution.map(row => getters.cluesForRowOrColumn(row)),
-        columns: getters.columns.map(column => getters.cluesForRowOrColumn(column)),
-      }
+    // returns the clues to display for a row
+    cluesForRow: state => (rownum) => {
+      return getters.cluesForRowOrColumn(state.solution[rownum])
     },
 
-    // helper functions
-
-    // returns the solution as an array of columns instead of rows
-    columns: state => {
-      let columns = []
-      for (let colnum = 0; colnum < state.width; colnum++) {
-        columns.push(state.solution.map(row => row[colnum]))
-      }
-      return columns
+    // returns the clues to display for a row
+    cluesForColumn: state => (colnum) => {
+      return getters.cluesForRowOrColumn(state.solution.map(row => row[colnum]))
     },
 
-    // returns the clues for a row or column
+    // helper function to return the clues for a row or column
     cluesForRowOrColumn: state => rowOrColumn => {
       // We're pushing an extra 0 at the end to ensure the last clue will be added correctly
       return rowOrColumn.push(0).reduce(({previous, count, clues}, color) => {
