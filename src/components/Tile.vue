@@ -1,6 +1,7 @@
 <template>
-  <td class="tile" :style="styleObject"
-  ></td>
+  <td class="tile" :style="styleObject">
+    <span v-if="markedAsEmpty">-</span>
+  </td>
 </template>
 
 <script>
@@ -35,5 +36,6 @@ export default {
     border-style: solid;
     border-top-width: thin;
     border-left-width: thin;
+    text-align: center;
   }
 </style>
