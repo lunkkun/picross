@@ -22,22 +22,46 @@ export default {
 
     // checks whether the entire board is completed
     isCompleted: (state, getters) => {
-      return state.colored.reduce((previousCompleted, row, rownum) => {
-        return previousCompleted && getters.rowIsCompleted(rownum)
-      }, true)
+      for (let rownum = 0; rownum < state.height; rownum++) {
+        if (!getters.rowIsCompleted(rownum)) {
+          return false
+        }
+      }
+
+      for (let colnum = 0; colnum < state.height; colnum++) {
+        if (!getters.columnIsCompleted(colnum)) {
+          return false
+        }
+      }
+
+      return true
     },
 
     // checks whether the row at the rownum is completed
-    rowIsCompleted: state => rownum => {
-      return state.colored[rownum].reduce((previousCompleted, color, colnum) => {
-        return previousCompleted && state.solution[rownum][colnum] === Math.max(color, 0) // treat -1 as 0
+    rowIsCompleted: (state, getters) => rownum => {
+      let clues = getters.cluesForRow(rownum)
+      let colored = getters.colorCountsForRowOrColumn(state.colored[rownum])
+
+      if (colored.length !== clues.length) {
+        return false
+      }
+
+      return clues.reduce((completed, clue, index) => {
+        return completed && clue.color === colored[index].color && clue.count === colored[index].count
       }, true)
     },
 
     // checks whether the column at the colnum is completed
-    columnIsCompleted: state => colnum => {
-      return state.colored.reduce((previousCompleted, row, rownum) => {
-        return previousCompleted && state.solution[rownum][colnum] === Math.max(row[colnum], 0) // treat -1 as 0
+    columnIsCompleted: (state, getters) => colnum => {
+      let clues = getters.cluesForColumn(colnum)
+      let colored = getters.colorCountsForRowOrColumn(state.colored.map(row => row[colnum]))
+
+      if (colored.length !== clues.length) {
+        return false
+      }
+
+      return clues.reduce((completed, clue, index) => {
+        return completed && clue.color === colored[index].color && clue.count === colored[index].count
       }, true)
     },
 
@@ -54,16 +78,16 @@ export default {
 
     // returns the clues to display for a row
     cluesForRow: (state, getters) => (rownum) => {
-      return getters.cluesForRowOrColumn(state.solution[rownum])
+      return getters.colorCountsForRowOrColumn(state.solution[rownum])
     },
 
     // returns the clues to display for a column
     cluesForColumn: (state, getters) => (colnum) => {
-      return getters.cluesForRowOrColumn(state.solution.map(row => row[colnum]))
+      return getters.colorCountsForRowOrColumn(state.solution.map(row => row[colnum]))
     },
 
-    // helper function to return the clues for a row or column
-    cluesForRowOrColumn: state => rowOrColumn => {
+    // helper function to return the color counts for a row or column
+    colorCountsForRowOrColumn: state => rowOrColumn => {
       // We create a copy and push an extra 0 at the end to ensure the last clue will be added correctly
       rowOrColumn.slice().push(0)
       return rowOrColumn.reduce(({previous, count, clues}, color) => {
