@@ -1,3 +1,5 @@
+import Vue from 'vue'
+
 export default {
   namespaced: true,
   state: {
@@ -85,7 +87,8 @@ export default {
   mutations: {
     // sets a tile to the next color, if any
     incrementTileColor: (state, {rownum, colnum}) => {
-      let color = state.colored[rownum][colnum]
+      let row = state.colored[rownum].slice() // create a copy
+      let color = row[colnum]
 
       if (color === -1) {
         color = 1
@@ -95,12 +98,15 @@ export default {
         color++
       }
 
-      state.colored[rownum][colnum] = color
+      row[colnum] = color
+      Vue.set(state.colored, rownum, row)
     },
 
     // marks a tile as explicitly set to empty by the user
     markTileAsEmpty: (state, {rownum, colnum}) => {
-      state.colored[rownum][colnum] = -1
+      let row = state.colored[rownum].slice() // create a copy
+      row[colnum] = -1
+      Vue.set(state.colored, rownum, row)
     },
 
     // clears all user-input
