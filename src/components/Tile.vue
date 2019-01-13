@@ -1,10 +1,12 @@
 <template>
-  <td class="tile" :style="styleObject">
+  <div class="tile" :style="styleObject">
     <span v-if="markedAsEmpty">-</span>
-  </td>
+  </div>
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
+
 export default {
   name: 'Tile',
   props: {
@@ -20,11 +22,15 @@ export default {
     },
     styleObject: function () {
       return {
-        "background-color": this.color,
-        "border-right-width": this.colnum % 5 === 4 ? "medium" : "thin",
-        "border-bottom-width": this.rownum % 5 === 4 ? "medium" : "thin",
+        'background-color': this.color,
+        'border-right-width': this.colnum % 5 === 4 && this.colnum < this.width - 1 ? 'medium' : 'thin',
+        'border-bottom-width': this.rownum % 5 === 4 && this.rownum < this.height - 1 ? 'medium' : 'thin',
       }
     },
+    ...mapGetters({
+      width: 'board/width',
+      height: 'board/height',
+    }),
   },
 }
 </script>
@@ -33,6 +39,7 @@ export default {
   .tile {
     width: 20px;
     height: 20px;
+    float: left;
     border-style: solid;
     border-top-width: thin;
     border-left-width: thin;
