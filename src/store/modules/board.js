@@ -62,8 +62,9 @@ export default {
 
     // helper function to return the clues for a row or column
     cluesForRowOrColumn: state => rowOrColumn => {
-      // We're pushing an extra 0 at the end to ensure the last clue will be added correctly
-      return rowOrColumn.push(0).reduce(({previous, count, clues}, color) => {
+      // We create a copy and push an extra 0 at the end to ensure the last clue will be added correctly
+      rowOrColumn.slice().push(0)
+      return rowOrColumn.reduce(({previous, count, clues}, color) => {
         if (color !== previous) {
           if (previous > 0) {
             // A block of colored tiles has ended; add a clue for it
