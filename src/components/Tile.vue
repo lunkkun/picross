@@ -1,5 +1,5 @@
 <template>
-  <div class="tile" :style="styleObject">
+  <div class="tile" :style="styleObject" @click="changeColor">
     <span v-if="markedAsEmpty">-</span>
   </div>
 </template>
@@ -31,6 +31,11 @@ export default {
       width: 'board/width',
       height: 'board/height',
     }),
+  },
+  methods: {
+    changeColor: function () {
+      this.$store.commit('board/incrementTileColor', {rownum: this.rownum, colnum: this.colnum})
+    }
   },
 }
 </script>
