@@ -9,7 +9,7 @@
     </div>
     <div class="segment">
       <div v-for="rownum in height" :key="rownum">
-        <tile v-for="colnum in width" :key="rownum-colnum" :rownum="rownum - 1" :colnum="colnum - 1"></tile>
+        <tile v-for="colnum in width" :key="rownum * 1000 + colnum" :rownum="rownum - 1" :colnum="colnum - 1"></tile>
       </div>
     </div>
   </div>
