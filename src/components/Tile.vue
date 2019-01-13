@@ -35,7 +35,7 @@ export default {
   methods: {
     changeColor: function () {
       this.$store.commit('board/incrementTileColor', {rownum: this.rownum, colnum: this.colnum})
-    }
+    },
   },
 }
 </script>
