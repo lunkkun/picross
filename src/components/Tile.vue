@@ -9,6 +9,7 @@
 
 <script>
 import {mapGetters} from 'vuex'
+import tinycolor from 'tinycolor2'
 
 export default {
   name: 'Tile',
@@ -28,11 +29,14 @@ export default {
         'background-color': this.color,
         'border-right-width': this.colnum % 5 === 4 && this.colnum < this.width - 1 ? 'medium' : 'thin',
         'border-bottom-width': this.rownum % 5 === 4 && this.rownum < this.height - 1 ? 'medium' : 'thin',
+        'color': tinycolor(this.defaultColor).isDark() ? 'white' : 'black',
+        'border-color': tinycolor(this.defaultColor).getBrightness() < 200 ? 'lightgrey' : 'grey',
       }
     },
     ...mapGetters({
       width: 'board/width',
       height: 'board/height',
+      defaultColor: 'board/defaultColor',
     }),
   },
   methods: {

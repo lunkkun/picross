@@ -20,6 +20,11 @@ export default {
       return state.height
     },
 
+    // returns the color for empty tiles
+    defaultColor: state => {
+      return state.colorScheme[0]
+    },
+
     // checks whether the entire board is completed
     isCompleted: (state, getters) => {
       for (let rownum = 0; rownum < state.height; rownum++) {
