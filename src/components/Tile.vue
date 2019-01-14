@@ -3,7 +3,7 @@
     @click.left="changeColor"
     @click.right="toggleMarkedAsEmpty"
     @contextmenu.prevent>
-    <span v-if="markedAsEmpty && !boardIsCompleted">-</span>
+    <span v-if="showMarkedAsEmpty">-</span>
   </div>
 </template>
 
@@ -23,6 +23,9 @@ export default {
     },
     markedAsEmpty: function () {
       return this.$store.getters['board/tileMarkedAsEmpty'](this.rownum, this.colnum)
+    },
+    showMarkedAsEmpty: function () {
+      return this.markedAsEmpty && !this.boardIsCompleted
     },
     styleObject: function () {
       return {
