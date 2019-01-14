@@ -29,9 +29,12 @@ export default {
         'background-color': this.color,
         'border-right-width': this.colnum % 5 === 4 && this.colnum < this.width - 1 ? 'medium' : 'thin',
         'border-bottom-width': this.rownum % 5 === 4 && this.rownum < this.height - 1 ? 'medium' : 'thin',
-        'color': tinycolor(this.defaultColor).isDark() ? 'white' : 'black',
-        'border-color': tinycolor(this.defaultColor).getBrightness() < 200 ? 'lightgrey' : 'grey',
+        'color': this.defaultColorBrightness < 144 ? 'white' : 'black',
+        'border-color': this.defaultColorBrightness < 144 && this.defaultColorBrightness > 112 ? 'lightgrey' : 'grey',
       }
+    },
+    defaultColorBrightness: function () {
+      return tinycolor(this.defaultColor).getBrightness()
     },
     ...mapGetters({
       width: 'board/width',
