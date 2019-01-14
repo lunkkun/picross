@@ -89,8 +89,9 @@ export default {
     // helper function to return the color counts for a row or column
     colorCountsForRowOrColumn: state => rowOrColumn => {
       // We create a copy and push an extra 0 at the end to ensure the last clue will be added correctly
-      rowOrColumn.slice().push(0)
-      return rowOrColumn.reduce(({previous, count, clues}, color) => {
+      let rowOrColumnCopy = rowOrColumn.slice()
+      rowOrColumnCopy.push(0)
+      return rowOrColumnCopy.reduce(({previous, count, clues}, color) => {
         if (color !== previous) {
           if (previous > 0) {
             // A block of colored tiles has ended; add a clue for it
