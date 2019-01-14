@@ -41,8 +41,9 @@ export default {
     border-style: none solid none solid;
     border-color: white;
     border-left-width: thin;
+    width: 20px;
   }
   .clue {
-    width: 20px;
+    height: 20px;
   }
 </style>

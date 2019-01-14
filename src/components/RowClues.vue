@@ -41,10 +41,10 @@ export default {
     border-style: solid none solid none;
     border-color: white;
     border-top-width: thin;
+    height: 20px;
   }
   .clue {
     float: left;
-    height: 20px;
     width: 20px;
   }
 </style>
