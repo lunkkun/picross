@@ -1,5 +1,7 @@
 {
-  "name": "winged",
+  "id": 2,
+  "difficulty": 5,
+  "name": "Winged",
   "colorScheme": [
     "white",
     "black"
