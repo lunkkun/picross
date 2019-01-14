@@ -3,7 +3,7 @@
     @click.left="changeColor"
     @click.right="toggleMarkedAsEmpty"
     @contextmenu.prevent>
-    <span v-if="markedAsEmpty">-</span>
+    <span v-if="markedAsEmpty && !boardIsCompleted">-</span>
   </div>
 </template>
 
@@ -40,6 +40,7 @@ export default {
       width: 'board/width',
       height: 'board/height',
       defaultColor: 'board/defaultColor',
+      boardIsCompleted: 'board/isCompleted',
     }),
   },
   methods: {
