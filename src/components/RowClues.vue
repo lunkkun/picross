@@ -24,6 +24,7 @@ export default {
     styleObject: function () {
       return {
         'border-bottom-width': this.rownum % 5 === 4 && this.rownum < this.height - 1 ? 'medium' : 'thin',
+        'opacity': this.completed ? 0.4 : 1,
       }
     },
     ...mapGetters({
