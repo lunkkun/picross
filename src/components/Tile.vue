@@ -1,5 +1,8 @@
 <template>
-  <div class="tile" :style="styleObject" @click="changeColor">
+  <div class="tile" :style="styleObject"
+    @click.left="changeColor"
+    @click.right="toggleMarkedAsEmpty"
+    @contextmenu.prevent>
     <span v-if="markedAsEmpty">-</span>
   </div>
 </template>
@@ -36,6 +39,9 @@ export default {
     changeColor: function () {
       this.$store.commit('board/incrementTileColor', {rownum: this.rownum, colnum: this.colnum})
     },
+    toggleMarkedAsEmpty: function () {
+      this.$store.commit('board/toggleTileMarkedAsEmpty', {rownum: this.rownum, colnum: this.colnum})
+    },
   },
 }
 </script>
@@ -49,5 +55,6 @@ export default {
     border-top-width: thin;
     border-left-width: thin;
     text-align: center;
+    cursor: default;
   }
 </style>

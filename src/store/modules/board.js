@@ -126,10 +126,11 @@ export default {
       Vue.set(state.colored, rownum, row)
     },
 
-    // marks a tile as explicitly set to empty by the user
-    markTileAsEmpty: (state, {rownum, colnum}) => {
+    // marks a tile as explicitly set to empty by the user,
+    // or sets the tile color to 0 if it was marked as empty before
+    toggleTileMarkedAsEmpty: (state, {rownum, colnum}) => {
       let row = state.colored[rownum].slice() // create a copy
-      row[colnum] = -1
+      row[colnum] = row[colnum] === -1 ? 0 : -1
       Vue.set(state.colored, rownum, row)
     },
 
