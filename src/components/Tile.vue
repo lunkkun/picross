@@ -62,6 +62,7 @@ export default {
     display: inline-block;
     width: 20px;
     height: 20px;
+    line-height: 20px;
     text-align: center;
     vertical-align: bottom;
     font-size: 15px;
