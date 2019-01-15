@@ -41,12 +41,12 @@ export default {
     justify-content: flex-end;
     height: 20px;
     border-style: solid none solid none;
-    border-color: white;
+    border-color: grey;
     border-top-width: thin;
   }
   .clue {
     width: 20px;
     font-size: 15px;
-    margin-top: 2px;
+    line-height:20px;
   }
 </style>
