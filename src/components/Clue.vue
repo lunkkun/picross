@@ -25,6 +25,6 @@ export default {
     width: 20px;
     height: 20px;
     font-size: 15px;
-    line-height:20px;
+    line-height: 20px;
   }
 </style>
