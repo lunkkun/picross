@@ -9,11 +9,13 @@ export default {
   name: 'Clue',
   props: {
     color: String,
+    completed: Boolean,
   },
   computed: {
     styleObject: function () {
       return {
         color: this.color,
+        opacity: this.completed ? 0.4 : 1,
       }
     },
   },

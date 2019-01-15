@@ -8,6 +8,10 @@ export default {
     solution: [],
     colored: [],
     colorScheme: [],
+    hovered: {
+      rownum: undefined,
+      colnum: undefined,
+    },
   },
   getters: {
     // returns the width of the board
@@ -81,13 +85,28 @@ export default {
       return state.colored[rownum][colnum] === -1
     },
 
+    // returns whether the tile is currently being hovered
+    tileIsHovered: state => (rownum, colnum) => {
+      return state.hovered.rownum === rownum && state.hovered.colnum === colnum
+    },
+
+    // returns whether a tile in this row is currently being hovered
+    rowIsHovered: state => rownum => {
+      return state.hovered.rownum === rownum
+    },
+
+    // returns whether a tile in this column is currently being hovered
+    columnIsHovered: state => colnum => {
+      return state.hovered.colnum === colnum
+    },
+
     // returns the clues to display for a row
-    cluesForRow: (state, getters) => (rownum) => {
+    cluesForRow: (state, getters) => rownum => {
       return getters.colorCountsForRowOrColumn(state.solution[rownum])
     },
 
     // returns the clues to display for a column
-    cluesForColumn: (state, getters) => (colnum) => {
+    cluesForColumn: (state, getters) => colnum => {
       return getters.colorCountsForRowOrColumn(state.solution.map(row => row[colnum]))
     },
 
@@ -138,6 +157,24 @@ export default {
       let row = state.colored[rownum].slice() // create a copy
       row[colnum] = row[colnum] === -1 ? 0 : -1
       Vue.set(state.colored, rownum, row)
+    },
+
+    // marks the tile as currently being hovered
+    setHovered: (state, {rownum, colnum}) => {
+      state.hovered = {
+        rownum: rownum,
+        colnum: colnum,
+      }
+    },
+
+    // marks the tile as not being hovered if it was previously being hovered
+    unsetHovered: (state, {rownum, colnum}) => {
+      if (state.hovered.rownum === rownum && state.hovered.colnum === colnum) {
+        state.hovered = {
+          rownum: undefined,
+          colnum: undefined,
+        }
+      }
     },
 
     // clears all user-input

@@ -1,6 +1,6 @@
 <template>
   <div class="clues" :style="styleObject">
-    <clue v-for="(clue, index) in clues" :key="index + 1" :color="clue.color">
+    <clue v-for="(clue, index) in clues" :key="index + 1" :color="clue.color" :completed="completed">
       {{ clue.count }}
     </clue>
   </div>
@@ -22,10 +22,13 @@ export default {
     completed: function () {
       return this.$store.getters['board/rowIsCompleted'](this.rownum)
     },
+    hovered: function () {
+      return this.$store.getters['board/rowIsHovered'](this.rownum)
+    },
     styleObject: function () {
       return {
         'border-bottom-width': this.rownum % 5 === 4 && this.rownum < this.height - 1 ? 'medium' : 'thin',
-        'opacity': this.completed ? 0.4 : 1,
+        'background-color': this.hovered ? 'lightgrey' : 'white',
       }
     },
     ...mapGetters({
