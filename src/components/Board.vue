@@ -1,14 +1,14 @@
 <template>
   <div class="board">
     <div class="segment"></div>
-    <div class="segment">
+    <div class="segment column-clues">
       <column-clues v-for="colnum in width" :key="colnum" :colnum="colnum - 1"></column-clues>
     </div>
-    <div class="segment">
+    <div class="segment row-clues">
       <row-clues v-for="rownum in height" :key="rownum" :rownum="rownum - 1"></row-clues>
     </div>
     <div class="segment">
-      <div v-for="rownum in height" :key="rownum">
+      <div class="tile-row" v-for="rownum in height" :key="rownum">
         <tile v-for="colnum in width" :key="rownum * 1000 + colnum" :rownum="rownum - 1" :colnum="colnum - 1"></tile>
       </div>
     </div>
@@ -48,5 +48,16 @@ export default {
   }
   .segment {
     border-style: none solid solid none;
+  }
+  .column-clues {
+    display: flex;
+    flex-direction: row;
+  }
+  .row-clues {
+    display: flex;
+    flex-direction: column;
+  }
+  .tile-row {
+    white-space: nowrap;
   }
 </style>

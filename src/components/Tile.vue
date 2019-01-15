@@ -1,5 +1,5 @@
 <template>
-  <div class="tile noselect" :style="styleObject"
+  <div class="tile" :style="styleObject"
     @click.left="changeColor"
     @click.right="toggleMarkedAsEmpty"
     @contextmenu.prevent>
@@ -59,22 +59,16 @@ export default {
 
 <style scoped>
   .tile {
+    display: inline-block;
     width: 20px;
     height: 20px;
-    float: left;
+    text-align: center;
+    vertical-align: bottom;
+    font-size: 15px;
     border-style: solid;
     border-top-width: thin;
     border-left-width: thin;
-    text-align: center;
     cursor: default;
-  }
-  .noselect {
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-    -khtml-user-select: none; /* Konqueror HTML */
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* Internet Explorer/Edge */
-    user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome and Opera */
+    user-select: none;
   }
 </style>

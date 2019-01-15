@@ -36,15 +36,17 @@ export default {
 
 <style scoped>
   .clues {
-    float: right;
-    clear: both;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    height: 20px;
     border-style: solid none solid none;
     border-color: white;
     border-top-width: thin;
-    height: 20px;
   }
   .clue {
-    float: left;
     width: 20px;
+    font-size: 15px;
+    margin-top: 2px;
   }
 </style>

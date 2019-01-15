@@ -36,14 +36,16 @@ export default {
 
 <style scoped>
   .clues {
-    display: inline-grid;
-    vertical-align: bottom;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 20px;
     border-style: none solid none solid;
     border-color: white;
     border-left-width: thin;
-    width: 20px;
   }
   .clue {
     height: 20px;
+    font-size: 15px;
   }
 </style>
