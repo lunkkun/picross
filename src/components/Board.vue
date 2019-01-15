@@ -8,7 +8,7 @@
       <row-clues v-for="rownum in height" :key="rownum" :rownum="rownum - 1"></row-clues>
     </div>
     <div class="segment">
-      <div class="tile-row" v-for="rownum in height" :key="rownum">
+      <div class="tile-row" v-for="rownum in height">
         <tile v-for="colnum in width" :key="rownum * 1000 + colnum" :rownum="rownum - 1" :colnum="colnum - 1"></tile>
       </div>
     </div>

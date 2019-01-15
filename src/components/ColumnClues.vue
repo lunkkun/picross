@@ -1,6 +1,6 @@
 <template>
   <div class="clues" :style="styleObject">
-    <clue v-for="clue in clues" :key="clue.id" :color="clue.color">
+    <clue v-for="(clue, index) in clues" :key="index + 1" :color="clue.color">
       {{ clue.count }}
     </clue>
   </div>
