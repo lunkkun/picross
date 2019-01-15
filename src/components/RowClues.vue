@@ -1,12 +1,13 @@
 <template>
   <div class="clues" :style="styleObject">
-    <div class="clue" v-for="clue in clues" :key="clue.id" :style="{'color': clue.color}">
+    <clue v-for="clue in clues" :key="clue.id" :color="clue.color">
       {{ clue.count }}
-    </div>
+    </clue>
   </div>
 </template>
 
 <script>
+import Clue from './Clue.vue'
 import {mapGetters} from 'vuex'
 
 export default {
@@ -31,6 +32,9 @@ export default {
       height: 'board/height',
     }),
   },
+  components: {
+    Clue,
+  },
 }
 </script>
 
@@ -43,10 +47,5 @@ export default {
     border-style: solid none solid none;
     border-color: grey;
     border-top-width: thin;
-  }
-  .clue {
-    width: 20px;
-    font-size: 15px;
-    line-height:20px;
   }
 </style>
