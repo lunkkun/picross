@@ -46,7 +46,7 @@ export default {
       return color.toString()
     },
     markedAsEmpty: function () {
-      return this.$store.getters['board/tileMarkedAsEmpty'](this.rownum, this.colnum)
+      return this.$store.getters['board/tileIsMarkedAsEmpty'](this.rownum, this.colnum)
     },
     showMarkedAsEmpty: function () {
       return this.markedAsEmpty && !this.boardIsCompleted

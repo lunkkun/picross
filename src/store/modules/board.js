@@ -99,7 +99,7 @@ export default {
     },
 
     // checks whether the user has explicitly marked the tile as empty
-    tileMarkedAsEmpty: state => (rownum, colnum) => {
+    tileIsMarkedAsEmpty: state => (rownum, colnum) => {
       return state.editing
         ? false
         : state.colored[rownum][colnum] === -1
