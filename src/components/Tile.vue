@@ -93,6 +93,8 @@ export default {
         this.colorValue++
       }
 
+      this.markedAsEmpty = false
+
       this.dispatchColorValue()
     },
     markOrUnmarkTileAsEmpty: function () {
