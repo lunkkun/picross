@@ -27,10 +27,11 @@ export default {
     },
     hoveredColor: function () {
       let color = tinycolor(this.color)
-      if (color.getBrightness() > 32) {
-        color.darken(color.getBrightness() / 256 * 20)
+      let brightness = color.getBrightness()
+      if (brightness > 32) {
+        color.darken(brightness / 256 * 20)
       } else {
-        color.lighten((256 - color.getBrightness()) / 256 * 20)
+        color.lighten((brightness) / 256 * 20)
       }
       return color.toString()
     },
