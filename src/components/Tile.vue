@@ -23,13 +23,14 @@ export default {
   },
   computed: {
     color: function () {
-      let color = tinycolor(this.$store.getters['board/tileColor'](this.rownum, this.colnum))
-      if (this.hovered) {
-        if (color.getBrightness() > 32) {
-          color.darken(color.getBrightness() / 256 * 20)
-        } else {
-          color.lighten((256 - color.getBrightness()) / 256 * 20)
-        }
+      return this.$store.getters['board/tileColor'](this.rownum, this.colnum)
+    },
+    hoveredColor: function () {
+      let color = tinycolor(this.color)
+      if (color.getBrightness() > 32) {
+        color.darken(color.getBrightness() / 256 * 20)
+      } else {
+        color.lighten((256 - color.getBrightness()) / 256 * 20)
       }
       return color.toString()
     },
@@ -52,7 +53,7 @@ export default {
     },
     styles: function () {
       return {
-        'background-color': this.color,
+        'background-color': this.hovered ? this.hoveredColor : this.color,
       }
     },
     defaultColorBrightness: function () {
