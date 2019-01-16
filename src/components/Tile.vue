@@ -1,5 +1,7 @@
 <template>
-  <div class="tile" :style="styleObject"
+  <div class="tile"
+    :class="classes"
+    :style="styles"
     @click.left="changeColor"
     @click.right="toggleMarkedAsEmpty"
     @contextmenu.prevent
@@ -40,13 +42,17 @@ export default {
     hovered: function () {
       return this.$store.getters['board/tileIsHovered'](this.rownum, this.colnum)
     },
-    styleObject: function () {
+    classes: function () {
+      return {
+        'thick-border-right': this.colnum % 5 === 4 && this.colnum < this.width - 1,
+        'thick-border-bottom': this.rownum % 5 === 4 && this.rownum < this.height - 1,
+        'white-text': this.defaultColorBrightness < 144,
+        'light-border': this.defaultColorBrightness < 144 && this.defaultColorBrightness > 112,
+      }
+    },
+    styles: function () {
       return {
         'background-color': this.color,
-        'border-right-width': this.colnum % 5 === 4 && this.colnum < this.width - 1 ? 'medium' : 'thin',
-        'border-bottom-width': this.rownum % 5 === 4 && this.rownum < this.height - 1 ? 'medium' : 'thin',
-        'color': this.defaultColorBrightness < 144 ? 'white' : 'black',
-        'border-color': this.defaultColorBrightness < 144 && this.defaultColorBrightness > 112 ? 'lightgrey' : 'grey',
       }
     },
     defaultColorBrightness: function () {
@@ -85,10 +91,21 @@ export default {
     text-align: center;
     vertical-align: bottom;
     font-size: 15px;
-    border-style: solid;
-    border-top-width: thin;
-    border-left-width: thin;
+    border: thin solid grey;
+    color: black;
     cursor: default;
     user-select: none;
+  }
+  .thick-border-right {
+    border-right-width: medium;
+  }
+  .thick-border-bottom {
+    border-bottom-width: medium;
+  }
+  .white-text {
+    color: white;
+  }
+  .light-border {
+    border-color: lightgrey;
   }
 </style>
