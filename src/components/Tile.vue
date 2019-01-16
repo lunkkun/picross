@@ -31,7 +31,7 @@ export default {
      * For dark colors, we make the hovered color lighter, by calculating the relative distance to our defined bound
      * and multiplying by a factor of 20, with a baseline of 5.
      * For lighter colors, we make the hovered color lighter, by calculating the relative distance to our defined bound
-     * and multiplying by a factor of 10, with a baseline of 5.
+     * and multiplying by a factor of 5, with a baseline of 5.
      *
      * @returns {string}
      */
@@ -39,7 +39,7 @@ export default {
       let color = tinycolor(this.color)
       let brightness = color.getBrightness()
       if (brightness > 32) {
-        color.darken((brightness - 32) / 224 * 10 + 5)
+        color.darken((brightness - 32) / 224 * 5 + 5)
       } else {
         color.lighten((32 - brightness) / 32 * 20 + 5)
       }
