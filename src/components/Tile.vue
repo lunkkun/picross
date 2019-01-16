@@ -27,7 +27,7 @@ export default {
     /**
      * Determines the color for the tile when hovered.
      * We differentiate between light and dark colors.
-     * For our purpose, colors with a brightness of 32 and below are considered dark.
+     * For our purpose, colors with a brightness of 48 and below are considered dark.
      * For dark colors, we make the hovered color lighter, by calculating the relative distance to our defined bound
      * and multiplying by a factor of 20, with a baseline of 5.
      * For lighter colors, we make the hovered color lighter, by calculating the relative distance to our defined bound
@@ -38,10 +38,10 @@ export default {
     hoveredColor: function () {
       let color = tinycolor(this.color)
       let brightness = color.getBrightness()
-      if (brightness > 32) {
-        color.darken((brightness - 32) / 224 * 5 + 5)
+      if (brightness > 48) {
+        color.darken((brightness - 48) / 208 * 5 + 5)
       } else {
-        color.lighten((32 - brightness) / 32 * 20 + 5)
+        color.brighten((48 - brightness) / 48 * 20 + 5)
       }
       return color.toString()
     },

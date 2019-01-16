@@ -24,7 +24,7 @@ import {mapGetters} from 'vuex'
 export default {
   name: 'Board',
   created: function () {
-    let board = require('../boards/winged.json')
+    let board = require('../boards/healthy-snack.json')
     this.$store.dispatch('board/load', board)
   },
   computed: {
