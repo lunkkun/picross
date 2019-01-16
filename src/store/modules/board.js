@@ -8,10 +8,8 @@ export default {
     solution: [],
     colored: [],
     colorScheme: [],
-    hovered: {
-      rownum: undefined,
-      colnum: undefined,
-    },
+    hoveredRownum: undefined,
+    hoveredColnum: undefined,
     editing: false,
   },
   getters: {
@@ -109,17 +107,17 @@ export default {
 
     // returns whether the tile is currently being hovered
     tileIsHovered: state => (rownum, colnum) => {
-      return state.hovered.rownum === rownum && state.hovered.colnum === colnum
+      return state.hoveredRownum === rownum && state.hoveredColnum === colnum
     },
 
     // returns whether a tile in this row is currently being hovered
     rowIsHovered: state => rownum => {
-      return state.hovered.rownum === rownum
+      return state.hoveredRownum === rownum
     },
 
     // returns whether a tile in this column is currently being hovered
     columnIsHovered: state => colnum => {
-      return state.hovered.colnum === colnum
+      return state.hoveredColnum === colnum
     },
 
     // returns the clues to display for a row
@@ -193,18 +191,13 @@ export default {
 
     // marks the tile as currently being hovered
     setHovered: (state, {rownum, colnum}) => {
-      state.hovered = {
-        rownum: rownum,
-        colnum: colnum,
-      }
+      state.hoveredRownum = rownum
+      state.hoveredColnum = colnum
     },
 
     // marks the tile as not being hovered if it was previously being hovered
     unsetHovered: state => {
-      state.hovered = {
-        rownum: undefined,
-        colnum: undefined,
-      }
+      state.hoveredRownum = state.hoveredColnum = undefined
     },
 
     // clears all user-input
