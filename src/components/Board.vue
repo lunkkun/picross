@@ -2,10 +2,10 @@
   <div class="board">
     <div class="segment"></div>
     <div class="segment column-clues">
-      <column-clues v-for="colnum in width" :key="colnum" :colnum="colnum - 1"></column-clues>
+      <clues v-for="colnum in width" :key="colnum" :direction="'column'" :index="colnum - 1"></clues>
     </div>
     <div class="segment row-clues">
-      <row-clues v-for="rownum in height" :key="rownum" :rownum="rownum - 1"></row-clues>
+      <clues v-for="rownum in height" :key="rownum" :direction="'row'" :index="rownum - 1"></clues>
     </div>
     <div class="segment">
       <div class="tile-row" v-for="rownum in height" :key="rownum">
@@ -17,8 +17,7 @@
 
 <script>
 import Tile from './Tile.vue'
-import ColumnClues from './ColumnClues.vue'
-import RowClues from './RowClues.vue'
+import Clues from './Clues.vue'
 import {mapGetters} from 'vuex'
 
 export default {
@@ -35,8 +34,7 @@ export default {
   },
   components: {
     Tile,
-    ColumnClues,
-    RowClues,
+    Clues,
   },
 }
 </script>

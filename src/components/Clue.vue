@@ -1,5 +1,5 @@
 <template>
-  <div class="clue" :style="styleObject">
+  <div class="clue" :class="classes" :style="styles">
     <slot></slot>
   </div>
 </template>
@@ -12,10 +12,14 @@ export default {
     completed: Boolean,
   },
   computed: {
-    styleObject: function () {
+    classes: function () {
+      return {
+        completed: this.completed,
+      }
+    },
+    styles: function () {
       return {
         color: this.color,
-        opacity: this.completed ? 0.4 : 1,
       }
     },
   },
@@ -28,5 +32,8 @@ export default {
     height: 20px;
     font-size: 15px;
     line-height: 20px;
+  }
+  .completed {
+    opacity: 0.4;
   }
 </style>
