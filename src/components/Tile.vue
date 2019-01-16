@@ -3,7 +3,7 @@
     :class="classes"
     :style="styles"
     @click.left="changeColor"
-    @click.right="toggleMarkedAsEmpty"
+    @click.right="markOrUnmarkTileAsEmpty"
     @contextmenu.prevent
     @mouseenter="setHovered()"
     @mouseleave="unsetHovered()">
@@ -62,6 +62,7 @@ export default {
       width: 'board/width',
       height: 'board/height',
       defaultColor: 'board/defaultColor',
+      editing: 'board/editing',
       boardIsCompleted: 'board/isCompleted',
     }),
   },
@@ -69,8 +70,12 @@ export default {
     changeColor: function () {
       this.$store.commit('board/incrementTileColor', {rownum: this.rownum, colnum: this.colnum})
     },
-    toggleMarkedAsEmpty: function () {
-      this.$store.commit('board/toggleTileMarkedAsEmpty', {rownum: this.rownum, colnum: this.colnum})
+    markOrUnmarkTileAsEmpty: function () {
+      if (this.editing) {
+        this.$store.commit('board/setTileToDefaultColor', {rownum: this.rownum, colnum: this.colnum})
+      } else {
+        this.$store.commit('board/toggleTileMarkedAsEmpty', {rownum: this.rownum, colnum: this.colnum})
+      }
     },
     setHovered: function () {
       this.$store.commit('board/setHovered', {rownum: this.rownum, colnum: this.colnum})

@@ -12,7 +12,7 @@ export default {
       rownum: undefined,
       colnum: undefined,
     },
-    editing: true,
+    editing: false,
   },
   getters: {
     // returns the width of the board
@@ -28,6 +28,11 @@ export default {
     // returns the color for empty tiles
     defaultColor: state => {
       return state.colorScheme[0]
+    },
+
+    // returns whether we are in editing mode
+    editing: state => {
+      return state.editing
     },
 
     // checks whether the entire board is completed
