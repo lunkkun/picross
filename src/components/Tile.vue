@@ -93,7 +93,7 @@ export default {
         this.colorValue++
       }
 
-      this.storeColorValue()
+      this.dispatchColorValue()
     },
     markOrUnmarkTileAsEmpty: function () {
       if (!this.editing) {
@@ -101,9 +101,9 @@ export default {
       }
       this.colorValue = 0
 
-      this.storeColorValue()
+      this.dispatchColorValue()
     },
-    storeColorValue: function () {
+    dispatchColorValue: function () {
       this.$store.dispatch('board/setTileColorValue', {rownum: this.rownum, colnum: this.colnum, value: this.colorValue})
     },
     setHovered: function () {
