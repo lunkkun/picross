@@ -28,7 +28,7 @@ export default {
     styleObject: function () {
       return {
         'border-right-width': this.colnum % 5 === 4 && this.colnum < this.width - 1 ? 'medium' : 'thin',
-        'background-color': this.hovered ? 'lightgrey' : 'white',
+        'background-color': this.hovered ? '#EEEEEE' : 'white',
       }
     },
     ...mapGetters({

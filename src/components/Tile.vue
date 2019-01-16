@@ -24,9 +24,9 @@ export default {
       let color = tinycolor(this.$store.getters['board/tileColor'](this.rownum, this.colnum))
       if (this.hovered) {
         if (color.getBrightness() > 32) {
-          color.darken(color.getBrightness() / 256 * 30)
+          color.darken(color.getBrightness() / 256 * 20)
         } else {
-          color.lighten((256 - color.getBrightness()) / 256 * 30)
+          color.lighten((256 - color.getBrightness()) / 256 * 20)
         }
       }
       return color.toString()
