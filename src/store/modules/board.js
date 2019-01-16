@@ -12,6 +12,7 @@ export default {
       rownum: undefined,
       colnum: undefined,
     },
+    editing: true,
   },
   getters: {
     // returns the width of the board
@@ -31,6 +32,10 @@ export default {
 
     // checks whether the entire board is completed
     isCompleted: (state, getters) => {
+      if (state.editing) {
+        return false
+      }
+
       for (let rownum = 0; rownum < state.height; rownum++) {
         if (!getters.rowIsCompleted(rownum)) {
           return false
@@ -48,6 +53,10 @@ export default {
 
     // checks whether the row at the rownum is completed
     rowIsCompleted: (state, getters) => rownum => {
+      if (state.editing) {
+        return false
+      }
+
       let clues = getters.cluesForRow(rownum)
       let colored = getters.colorCountsForRowOrColumn(state.colored[rownum])
 
@@ -62,6 +71,10 @@ export default {
 
     // checks whether the column at the colnum is completed
     columnIsCompleted: (state, getters) => colnum => {
+      if (state.editing) {
+        return false
+      }
+
       let clues = getters.cluesForColumn(colnum)
       let colored = getters.colorCountsForRowOrColumn(state.colored.map(row => row[colnum]))
 
@@ -76,13 +89,17 @@ export default {
 
     // returns the way the requested tile was colored
     tileColor: state => (rownum, colnum) => {
-      let color = Math.max(state.colored[rownum][colnum], 0) // treat -1 as 0
+      let color = state.editing
+        ? state.solution[rownum][colnum]
+        : Math.max(state.colored[rownum][colnum], 0) // treat -1 as 0
       return state.colorScheme[color]
     },
 
     // checks whether the user has explicitly marked the tile as empty
     tileMarkedAsEmpty: state => (rownum, colnum) => {
-      return state.colored[rownum][colnum] === -1
+      return state.editing
+        ? false
+        : state.colored[rownum][colnum] === -1
     },
 
     // returns whether the tile is currently being hovered
@@ -136,7 +153,10 @@ export default {
   mutations: {
     // sets a tile to the next color, if any
     incrementTileColor: (state, {rownum, colnum}) => {
-      let row = state.colored[rownum].slice() // create a copy
+      let board = state.editing
+        ? state.solution
+        : state.colored
+      let row = board[rownum].slice() // create a copy
       let color = row[colnum]
 
       if (color === -1) {
@@ -148,7 +168,7 @@ export default {
       }
 
       row[colnum] = color
-      Vue.set(state.colored, rownum, row)
+      Vue.set(board, rownum, row)
     },
 
     // marks a tile as explicitly set to empty by the user,
@@ -157,6 +177,13 @@ export default {
       let row = state.colored[rownum].slice() // create a copy
       row[colnum] = row[colnum] === -1 ? 0 : -1
       Vue.set(state.colored, rownum, row)
+    },
+
+    // set the tile in the solution to the default color
+    setTileToDefaultColor: (state, {rownum, colnum}) => {
+      let row = state.solution[rownum].slice() // create a copy
+      row[colnum] = 0
+      Vue.set(state.solution, rownum, row)
     },
 
     // marks the tile as currently being hovered

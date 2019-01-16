@@ -18,19 +18,19 @@ export default {
   },
   computed: {
     clues: function () {
-      return this.direction === 'row' ?
-        this.$store.getters['board/cluesForRow'](this.index) :
-        this.$store.getters['board/cluesForColumn'](this.index)
+      return this.direction === 'row'
+        ? this.$store.getters['board/cluesForRow'](this.index)
+        : this.$store.getters['board/cluesForColumn'](this.index)
     },
     completed: function () {
-      return this.direction === 'row' ?
-        this.$store.getters['board/rowIsCompleted'](this.index) :
-        this.$store.getters['board/columnIsCompleted'](this.index)
+      return this.direction === 'row'
+        ? this.$store.getters['board/rowIsCompleted'](this.index)
+        : this.$store.getters['board/columnIsCompleted'](this.index)
     },
     hovered: function () {
-      return this.direction === 'row' ?
-        this.$store.getters['board/rowIsHovered'](this.index) :
-        this.$store.getters['board/columnIsHovered'](this.index)
+      return this.direction === 'row'
+        ? this.$store.getters['board/rowIsHovered'](this.index)
+        : this.$store.getters['board/columnIsHovered'](this.index)
     },
     classes: function () {
       return {
