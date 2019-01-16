@@ -200,12 +200,10 @@ export default {
     },
 
     // marks the tile as not being hovered if it was previously being hovered
-    unsetHovered: (state, {rownum, colnum}) => {
-      if (state.hovered.rownum === rownum && state.hovered.colnum === colnum) {
-        state.hovered = {
-          rownum: undefined,
-          colnum: undefined,
-        }
+    unsetHovered: state => {
+      state.hovered = {
+        rownum: undefined,
+        colnum: undefined,
       }
     },
 

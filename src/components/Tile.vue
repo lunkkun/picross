@@ -5,8 +5,7 @@
     @click.left="changeColor"
     @click.right="markOrUnmarkTileAsEmpty"
     @contextmenu.prevent
-    @mouseenter="setHovered()"
-    @mouseleave="unsetHovered()">
+    @mouseenter="setHovered()">
     <span v-if="showMarkedAsEmpty">-</span>
   </div>
 </template>
@@ -81,9 +80,6 @@ export default {
     },
     setHovered: function () {
       this.$store.commit('board/setHovered', {rownum: this.rownum, colnum: this.colnum})
-    },
-    unsetHovered: function () {
-      this.$store.commit('board/unsetHovered', {rownum: this.rownum, colnum: this.colnum})
     },
   },
 }

@@ -7,7 +7,8 @@
     <div class="segment row-clues">
       <clues v-for="rownum in height" :key="rownum" :direction="'row'" :index="rownum - 1"></clues>
     </div>
-    <div class="segment">
+    <div class="segment"
+      @mouseleave="unsetHovered()">
       <div class="tile-row" v-for="rownum in height" :key="rownum">
         <tile v-for="colnum in width" :key="rownum * 1000 + colnum" :rownum="rownum - 1" :colnum="colnum - 1"></tile>
       </div>
@@ -23,7 +24,7 @@ import {mapGetters} from 'vuex'
 export default {
   name: 'Board',
   created: function () {
-    let board = require('../boards/healthy-snack.json')
+    let board = require('../boards/winged.json')
     this.$store.dispatch('board/load', board)
   },
   computed: {
@@ -31,6 +32,11 @@ export default {
       width: 'board/width',
       height: 'board/height',
     }),
+  },
+  methods: {
+    unsetHovered: function () {
+      this.$store.commit('board/unsetHovered')
+    },
   },
   components: {
     Tile,
