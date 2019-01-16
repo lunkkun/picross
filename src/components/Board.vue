@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     unsetHovered: function () {
-      this.$store.commit('board/unsetHovered')
+      this.$store.dispatch('board/unsetHovered')
     },
   },
   components: {

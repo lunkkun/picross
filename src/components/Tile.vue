@@ -5,7 +5,8 @@
     @click.left="changeColor"
     @click.right="markOrUnmarkTileAsEmpty"
     @contextmenu.prevent
-    @mouseenter="setHovered()">
+    @mouseenter="setHovered()"
+    @mouseleave="unsetHovered()">
     <span v-if="showMarkedAsEmpty">-</span>
   </div>
 </template>
@@ -20,9 +21,16 @@ export default {
     rownum: Number,
     colnum: Number,
   },
+  data: function () {
+    return {
+      hovered: false,
+      markedAsEmpty: false,
+      colorValue: 0,
+    }
+  },
   computed: {
     color: function () {
-      return this.$store.getters['board/tileColor'](this.rownum, this.colnum)
+      return this.colorScheme[this.colorValue]
     },
     /**
      * Determines the color for the tile when hovered.
@@ -45,14 +53,8 @@ export default {
       }
       return color.toString()
     },
-    markedAsEmpty: function () {
-      return this.$store.getters['board/tileIsMarkedAsEmpty'](this.rownum, this.colnum)
-    },
     showMarkedAsEmpty: function () {
       return this.markedAsEmpty && !this.boardIsCompleted
-    },
-    hovered: function () {
-      return this.$store.getters['board/tileIsHovered'](this.rownum, this.colnum)
     },
     classes: function () {
       return {
@@ -68,29 +70,44 @@ export default {
       }
     },
     defaultColorBrightness: function () {
-      return tinycolor(this.defaultColor).getBrightness()
+      return tinycolor(this.colorScheme[0]).getBrightness()
     },
     ...mapGetters({
       width: 'board/width',
       height: 'board/height',
-      defaultColor: 'board/defaultColor',
+      colorScheme: 'board/colorScheme',
       editing: 'board/editing',
       boardIsCompleted: 'board/isCompleted',
     }),
   },
   methods: {
     changeColor: function () {
-      this.$store.commit('board/incrementTileColor', {rownum: this.rownum, colnum: this.colnum})
+      if (this.colorValue === this.colorScheme.length - 1) {
+        this.colorValue = 0
+      } else {
+        this.colorValue++
+      }
+
+      this.storeColorValue()
     },
     markOrUnmarkTileAsEmpty: function () {
-      if (this.editing) {
-        this.$store.commit('board/setTileToDefaultColor', {rownum: this.rownum, colnum: this.colnum})
-      } else {
-        this.$store.commit('board/toggleTileMarkedAsEmpty', {rownum: this.rownum, colnum: this.colnum})
+      if (!this.editing) {
+        this.markedAsEmpty = !this.markedAsEmpty
       }
+      this.colorValue = 0
+
+      this.storeColorValue()
+    },
+    storeColorValue: function () {
+      this.$store.dispatch('board/setTileColorValue', {rownum: this.rownum, colnum: this.colnum, value: this.colorValue})
     },
     setHovered: function () {
-      this.$store.commit('board/setHovered', {rownum: this.rownum, colnum: this.colnum})
+      this.hovered = true
+      this.$store.dispatch('board/setHovered', {rownum: this.rownum, colnum: this.colnum})
+    },
+    unsetHovered: function () {
+      this.hovered = false
+      // note: the store will be updated by the curser moving into another tile, or by leaving the board
     },
   },
 }
