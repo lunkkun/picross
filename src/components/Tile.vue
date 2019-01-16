@@ -28,6 +28,11 @@ export default {
       colorValue: 0,
     }
   },
+  created: function () {
+    if (this.editing) {
+      this.colorValue = this.$store.getters['board/solutionColorValue'](this.rownum, this.colnum)
+    }
+  },
   computed: {
     color: function () {
       return this.colorScheme[this.colorValue]

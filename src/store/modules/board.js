@@ -33,6 +33,11 @@ export default {
       return state.editing
     },
 
+    // returns the color value for a tile from the solution
+    solutionColorValue: state => (rownum, colnum) => {
+      return state.solution[rownum][colnum]
+    },
+
     // checks whether the entire board is completed
     isCompleted: (state, getters) => {
       if (state.editing) {
