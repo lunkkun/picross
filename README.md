@@ -1,5 +1,7 @@
 # picross
 
+A simple Picross app made with Vue.js
+
 ## Project setup
 ```
 npm install
